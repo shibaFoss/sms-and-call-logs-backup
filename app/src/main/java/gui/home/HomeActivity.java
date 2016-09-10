@@ -15,7 +15,6 @@ import utils.Timer;
 
 public class HomeActivity extends BaseActivity {
 
-
     /**
      * The call back function is used to get the layout res Id of
      * the activity.
@@ -26,7 +25,6 @@ public class HomeActivity extends BaseActivity {
         return R.layout.activity_home;
     }
 
-
     /**
      * The function get called on {@link Activity#onPostCreate(Bundle)}
      * function of the activity.
@@ -35,21 +33,8 @@ public class HomeActivity extends BaseActivity {
      */
     @Override
     public void onInitialize(Bundle bundle) {
-
-    }
-
-
-    @Override
-    public void onResumed() {
         loadBannerAd();
     }
-
-
-    @Override
-    public void onPaused() {
-
-    }
-
 
     /**
      * The function get called when the activity's {@link Activity#onBackPressed()}
@@ -58,58 +43,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void onClosed() {
         exitActivityOnDoublePress();
-    }
-
-
-    /**
-     * The function get called when the activity is destroying.
-     */
-    @Override
-    public void onDestroyed() {
-
-    }
-
-
-    /**
-     * The function opens the navigation drawer,
-     * Note : the function get called automatically when the user click the navigation button.
-     */
-    public void openNavigationDrawer(View view) {
-        new MessageDialog(this)
-                .setTitle(getString(R.string.str_welcome))
-                .setMessage(getString(R.string.str_premium_upgrade_msg))
-                .setButtonName(getString(R.string.str_upgrade_premium), getString(R.string.str_skip))
-                .getDialog().show();
-    }
-
-
-    /**
-     * Note : the function get called automatically when the user click the backup button.
-     */
-    public void onClickedBackup(View view) {
-        BackupTypeChooserDialog typeChooserDialog = new BackupTypeChooserDialog(this);
-        typeChooserDialog.getDialog().show();
-    }
-
-
-    /**
-     * Note : the function get called automatically when the user click the restore button.
-     */
-    public void onClickedRestore(View view) {
-        vibrate(20);
-        toast(getString(R.string.str_restore));
-    }
-
-
-    public void onClickedView(View view) {
-        vibrate(20);
-        toast(getString(R.string.str_view));
-    }
-
-
-    public void onClickedSearch(View view) {
-        vibrate(20);
-        toast(getString(R.string.str_search));
     }
 
 
@@ -142,5 +75,43 @@ public class HomeActivity extends BaseActivity {
                 });
             }
         }
+    }
+
+    /**
+     * The function opens the navigation drawer,
+     * Note : the function get called automatically when the user click the navigation button.
+     */
+    public void openNavigationDrawer(View view) {
+        new MessageDialog(this)
+                .setTitle(getString(R.string.welcome))
+                .setMessage(getString(R.string.premium_upgrade_msg))
+                .setButtonName(getString(R.string.upgrade_premium), getString(R.string.skip))
+                .show();
+    }
+
+    /**
+     * Note : the function get called automatically when the user click the backup button.
+     */
+    public void onClickedBackup(View view) {
+        BackupTypeChooserDialog typeChooserDialog = new BackupTypeChooserDialog(this);
+        typeChooserDialog.getDialog().show();
+    }
+
+    /**
+     * Note : the function get called automatically when the user click the restore button.
+     */
+    public void onClickedRestore(View view) {
+        vibrate(20);
+        toast(getString(R.string.restore));
+    }
+
+    public void onClickedView(View view) {
+        vibrate(20);
+        toast(getString(R.string.view));
+    }
+
+    public void onClickedSearch(View view) {
+        vibrate(20);
+        toast(getString(R.string.search));
     }
 }

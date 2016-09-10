@@ -13,26 +13,6 @@ public abstract class BaseFragment extends Fragment {
     protected View layoutView;
     private BaseActivity baseActivity;
 
-
-    /**
-     * The method gets called by the {@link BaseFragment} for getting the
-     * fragment layout resource Id.
-     *
-     * @return the fragment layout resource id.
-     */
-    protected abstract int getLayoutResId();
-
-
-    /**
-     * The method gets called by the {@link BaseFragment} after completion of the
-     * fragment layout loading.
-     *
-     * @param layoutView         the loaded fragment layout view.
-     * @param savedInstanceState the savedInstanceState {@link Bundle} of the fragment.
-     */
-    protected abstract void onAfterLayoutLoad(View layoutView, Bundle savedInstanceState);
-
-
     @Override
     public View onCreateView(LayoutInflater layoutInflater,
                              ViewGroup layoutContainer, Bundle savedInstanceState) {
@@ -40,6 +20,12 @@ public abstract class BaseFragment extends Fragment {
         return layoutInflater.inflate(getLayoutResId(), layoutContainer, false);
     }
 
+    /**
+     * The method gets called by the {@link BaseFragment} for getting the
+     * fragment layout resource Id.
+     * @return the fragment layout resource id.
+     */
+    protected abstract int getLayoutResId();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -47,14 +33,20 @@ public abstract class BaseFragment extends Fragment {
         this.onAfterLayoutLoad(view, savedInstanceState);
     }
 
-
-    public BaseActivity getBaseActivity() {
-        return this.baseActivity;
-    }
-
+    /**
+     * The method gets called by the {@link BaseFragment} after completion of the
+     * fragment layout loading.
+     * @param layoutView         the loaded fragment layout view.
+     * @param savedInstanceState the savedInstanceState {@link Bundle} of the fragment.
+     */
+    protected abstract void onAfterLayoutLoad(View layoutView, Bundle savedInstanceState);
 
     public App getApp() {
         return this.getBaseActivity().getApp();
+    }
+
+    public BaseActivity getBaseActivity() {
+        return this.baseActivity;
     }
 
 }

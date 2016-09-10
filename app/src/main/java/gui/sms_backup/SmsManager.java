@@ -17,12 +17,20 @@ public class SmsManager extends BaseWritableObject {
     public BaseActivity activity;
     public ArrayList<SMS> smsList;
 
-
     public SmsManager(BaseActivity activity) {
         this.activity = activity;
         this.smsList = new ArrayList<>();
     }
 
+    public ArrayList<Conversation> getAllConversations() {
+        ArrayList<Conversation> conversationList = new ArrayList<>();
+        ArrayList<SMS> allSmsList = getAllSms("all");
+        for (SMS sms : allSmsList) {
+
+        }
+
+        return null;
+    }
 
     /**
      * The function will get all the sms from the {@link ContentResolver} and return
@@ -55,18 +63,6 @@ public class SmsManager extends BaseWritableObject {
         }
         return smsList;
     }
-
-
-    public ArrayList<Conversation> getAllConversations() {
-        ArrayList<Conversation> conversationList = new ArrayList<>();
-        ArrayList<SMS> allSmsList = getAllSms("all");
-        for (SMS sms : allSmsList) {
-
-        }
-
-        return null;
-    }
-
 
     /**
      * The structural class of sms.

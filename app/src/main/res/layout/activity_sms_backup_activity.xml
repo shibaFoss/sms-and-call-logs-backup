@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@drawable/ic_button_selector"
-            android:contentDescription="@string/str_back"
+            android:contentDescription="@string/back"
             android:onClick="onBackClicked"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
@@ -29,7 +29,7 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/bnt_selection"
             android:layout_toRightOf="@+id/bnt_back"
-            android:text="@string/str_sms_backup_small_cap"/>
+            android:text="@string/sms_backup_small_cap"/>
 
         <ImageButton
             android:id="@+id/bnt_selection"
@@ -38,7 +38,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
             android:background="@drawable/ic_button_selector"
-            android:contentDescription="@string/str_back"
+            android:contentDescription="@string/back"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
             android:src="@drawable/ic_check_box"/>
@@ -77,7 +77,7 @@
             android:gravity="center"
             android:onClick="onClickedBackup"
             android:padding="@dimen/dp_10"
-            android:text="@string/str_backup"
+            android:text="@string/backup"
             android:textAllCaps="true"
             />
 

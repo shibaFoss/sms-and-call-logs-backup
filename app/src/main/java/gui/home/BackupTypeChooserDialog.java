@@ -14,21 +14,14 @@ public class BackupTypeChooserDialog implements View.OnClickListener {
     private BaseActivity activity;
     private Dialog dialog;
 
-
     public BackupTypeChooserDialog(BaseActivity activity) {
         this.activity = activity;
         this.dialog = DialogUtility.generateNewDialog(activity, R.layout.dialog_backup_type_chooser);
         TextView title = (TextView) dialog.findViewById(R.id.txt_title);
-        title.setText(activity.getString(R.string.str_select_backup_type));
+        title.setText(activity.getString(R.string.select_backup_type));
         ViewUtility.setViewOnClickListener(this, dialog,
                 R.id.bnt_sms_backup, R.id.bnt_call_backup, R.id.bnt_contact_backup);
     }
-
-
-    public Dialog getDialog() {
-        return this.dialog;
-    }
-
 
     @Override
     public void onClick(View view) {
@@ -49,5 +42,9 @@ public class BackupTypeChooserDialog implements View.OnClickListener {
             }
             break;
         }
+    }
+
+    public Dialog getDialog() {
+        return this.dialog;
     }
 }

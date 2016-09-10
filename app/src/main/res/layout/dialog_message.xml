@@ -20,7 +20,7 @@
         android:layout_marginTop="@dimen/dp_8"
 
         android:lineSpacingExtra="@dimen/dp_2"
-        android:text="@string/str_the_lion_story"
+        android:text="@string/the_lion_story"
         android:textColor="@color/black_text"
         />
 

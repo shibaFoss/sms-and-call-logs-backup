@@ -18,7 +18,7 @@
         android:layout_marginTop="@dimen/dp_0"
 
         android:gravity="center"
-        android:text="@string/str_hello_world"
+        android:text="@string/hello_world"
         />
 
     <View

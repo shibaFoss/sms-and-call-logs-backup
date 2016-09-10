@@ -31,7 +31,7 @@
 
         android:layout_toRightOf="@+id/progress"
         android:padding="@dimen/dp_8"
-        android:text="@string/str_loading"
+        android:text="@string/loading"
         android:textColor="@color/black_text"
         />
 

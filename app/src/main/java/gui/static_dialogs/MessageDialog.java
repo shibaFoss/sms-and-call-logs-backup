@@ -13,20 +13,18 @@ import utils.DialogUtility;
  * The class displays a message dialog to the user.
  */
 public class MessageDialog implements View.OnClickListener {
-    private BaseActivity baseActivity;
-    private Dialog dialog;
+
+    public Dialog dialog;
     private TextView title, message, yesBnt, noBnt;
     private LinearLayout titleLayout;
     private View actionButtonBorder;
     private OnClickButton onClickButtonListener;
-
 
     /**
      * Public constructor.
      * @param activity the activity is needed for building the dialog.
      */
     public MessageDialog(BaseActivity activity) {
-        this.baseActivity = activity;
         this.dialog = DialogUtility.generateNewDialog(activity, R.layout.dialog_message);
 
         this.title = (TextView) dialog.findViewById(R.id.txt_title);
@@ -45,23 +43,29 @@ public class MessageDialog implements View.OnClickListener {
         actionButtonBorder.setVisibility(View.GONE);
     }
 
-
     @Override
     public void onClick(View view) {
         if (view.getId() == yesBnt.getId()) {
             if (onClickButtonListener != null)
                 onClickButtonListener.onYesClick(this);
             else
-                getDialog().dismiss();
+                dialog.dismiss();
 
         } else if (view.getId() == noBnt.getId()) {
             if (onClickButtonListener != null)
                 onClickButtonListener.onNoClick(this);
             else
-                getDialog().dismiss();
+                dialog.dismiss();
         }
     }
 
+    public void dismiss() {
+        dialog.dismiss();
+    }
+
+    public void show() {
+        dialog.show();
+    }
 
     /**
      * The function sets the given string to the dialog's title.
@@ -76,7 +80,6 @@ public class MessageDialog implements View.OnClickListener {
         return this;
     }
 
-
     /**
      * The function sets the given string to the dialog's message field.
      * @param messageText the string to be set on dialog's message field.
@@ -85,7 +88,6 @@ public class MessageDialog implements View.OnClickListener {
         message.setText(messageText);
         return this;
     }
-
 
     /**
      * The function sets the string to the dialog's action buttons.
@@ -102,17 +104,10 @@ public class MessageDialog implements View.OnClickListener {
         return this;
     }
 
-
     public MessageDialog setCallback(OnClickButton callback) {
         this.onClickButtonListener = callback;
         return this;
     }
-
-
-    public Dialog getDialog() {
-        return this.dialog;
-    }
-
 
     /**
      * Th interface is used for callback mechanism of button click event.

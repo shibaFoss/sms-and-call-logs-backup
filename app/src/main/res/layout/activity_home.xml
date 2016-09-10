@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="58dp"
         android:background="@drawable/ic_button_selector"
-        android:contentDescription="@string/str_menu_navigation"
+        android:contentDescription="@string/menu_navigation"
         android:onClick="openNavigationDrawer"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
@@ -25,7 +25,7 @@
         android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginRight="@dimen/dp_16"
         android:layout_marginStart="@dimen/dp_16"
-        android:contentDescription="@string/str_home_header_icon"
+        android:contentDescription="@string/home_header_icon"
         android:src="@drawable/ic_home_header"/>
 
     <com.google.android.gms.ads.AdView

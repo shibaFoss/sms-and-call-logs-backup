@@ -19,7 +19,7 @@
             android:layout_width="@dimen/dp_45"
             android:layout_height="@dimen/dp_45"
             android:layout_margin="@dimen/dp_8"
-            android:contentDescription="@string/str_sms_backup"
+            android:contentDescription="@string/sms_backup"
             android:padding="@dimen/dp_5"
             android:src="@drawable/ic_sms"/>
 
@@ -30,7 +30,7 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_8"
             android:gravity="center_vertical"
-            android:text="@string/str_sms_backup"
+            android:text="@string/sms_backup"
             />
 
     </LinearLayout>
@@ -47,7 +47,7 @@
             android:layout_width="@dimen/dp_45"
             android:layout_height="@dimen/dp_45"
             android:layout_margin="@dimen/dp_8"
-            android:contentDescription="@string/str_call_logs_backup"
+            android:contentDescription="@string/call_logs_backup"
             android:padding="@dimen/dp_5"
             android:src="@drawable/ic_call"/>
 
@@ -58,7 +58,7 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_8"
             android:gravity="center_vertical"
-            android:text="@string/str_call_logs_backup"
+            android:text="@string/call_logs_backup"
             />
 
     </LinearLayout>
@@ -75,7 +75,7 @@
             android:layout_width="@dimen/dp_45"
             android:layout_height="@dimen/dp_45"
             android:layout_margin="@dimen/dp_8"
-            android:contentDescription="@string/str_contact_backup"
+            android:contentDescription="@string/contact_backup"
             android:padding="@dimen/dp_5"
             android:src="@drawable/ic_contact_book"/>
 
@@ -86,7 +86,7 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_8"
             android:gravity="center_vertical"
-            android:text="@string/str_contact_backup"
+            android:text="@string/contact_backup"
             />
 
     </LinearLayout>

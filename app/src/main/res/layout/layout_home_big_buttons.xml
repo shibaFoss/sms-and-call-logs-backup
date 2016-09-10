@@ -29,7 +29,7 @@
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_60"
                 android:layout_gravity="center_horizontal"
-                android:contentDescription="@string/str_backup_icon"
+                android:contentDescription="@string/backup_icon"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/ic_backup"/>
 
@@ -47,7 +47,7 @@
                 android:shadowDy=".4"
                 android:shadowRadius=".4"
 
-                android:text="@string/str_backup"
+                android:text="@string/backup"
                 android:textSize="@dimen/material_text_button"
                 />
 
@@ -69,7 +69,7 @@
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_60"
                 android:layout_gravity="center_horizontal"
-                android:contentDescription="@string/str_restore_icon"
+                android:contentDescription="@string/restore_icon"
                 android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_restore"/>
 
@@ -87,7 +87,7 @@
                 android:shadowDy=".4"
                 android:shadowRadius=".4"
 
-                android:text="@string/str_restore"
+                android:text="@string/restore"
                 android:textSize="@dimen/material_text_button"
                 />
 
@@ -117,7 +117,7 @@
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_60"
                 android:layout_gravity="center_horizontal"
-                android:contentDescription="@string/str_backup_icon"
+                android:contentDescription="@string/backup_icon"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/ic_view"/>
 
@@ -135,7 +135,7 @@
                 android:shadowDy=".4"
                 android:shadowRadius=".4"
 
-                android:text="@string/str_view"
+                android:text="@string/view"
                 android:textSize="@dimen/material_text_button"
                 />
 
@@ -157,7 +157,7 @@
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_60"
                 android:layout_gravity="center_horizontal"
-                android:contentDescription="@string/str_restore_icon"
+                android:contentDescription="@string/restore_icon"
                 android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_search_phone"/>
 
@@ -175,7 +175,7 @@
                 android:shadowDy=".4"
                 android:shadowRadius=".4"
 
-                android:text="@string/str_search"
+                android:text="@string/search"
                 android:textSize="@dimen/material_text_button"
                 />
 

@@ -8,6 +8,7 @@ import gui.BaseActivity;
 import in.softc.app.R;
 
 public class SMSBackupActivity extends BaseActivity {
+
     /**
      * The call back function is used to get the layout res Id of
      * the activity.
@@ -17,7 +18,6 @@ public class SMSBackupActivity extends BaseActivity {
     public int getLayoutResId() {
         return R.layout.activity_sms_backup_activity;
     }
-
 
     /**
      * The function get called on {@link Activity#onPostCreate(Bundle)}
@@ -30,19 +30,6 @@ public class SMSBackupActivity extends BaseActivity {
 
     }
 
-
-    @Override
-    public void onPaused() {
-
-    }
-
-
-    @Override
-    public void onResumed() {
-
-    }
-
-
     /**
      * The function get called when the activity's {@link Activity#onBackPressed()}
      * function get executed.
@@ -52,20 +39,9 @@ public class SMSBackupActivity extends BaseActivity {
         finish();
     }
 
-
-    /**
-     * The function get called when the activity is destroying.
-     */
-    @Override
-    public void onDestroyed() {
-
-    }
-
-
     public void onBackClicked(View view) {
         onClosed();
     }
-
 
     public void onClickedBackup(View view) {
         SmsManager smsManager = new SmsManager(this);

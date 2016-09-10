@@ -2,7 +2,6 @@ package gui;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -12,6 +11,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import core.App;
 import gui.static_dialogs.MessageDialog;
+import gui.static_dialogs.OnButtonClick;
 import in.softc.app.R;
 import libs.AsyncJob;
 import libs.localization.LocalizationActivity;
@@ -32,22 +33,44 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * activity creation.
  * @author Shiba
  */
-@SuppressWarnings("unused")
 public abstract class BaseActivity extends LocalizationActivity {
 
     /**
      * The variable is requesting code that is used to requesting permissions.
      */
     public static final int USES_PERMISSIONS_REQUEST_CODE = 4;
+
     public boolean isPremiumVersion;
     private App app;
     private Vibrator vibrator;
+
     /**
      * The variable is used as a indication that if the activity is visible on not.
      */
     private boolean isActivityRunning = false;
     private int isBackPressEventFired = 0;
 
+    @Override
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        initiate();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isActivityRunning = true;
+    }
+
+    private void initiate() {
+        //initialize all the basic objects
+        this.vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        this.app = (App) getApplication();
+
+        //set the activity layout
+        if (getLayoutResId() != -1)
+            setContentView(getLayoutResId());
+    }
 
     /**
      * The call back function is used to get the layout res Id of
@@ -55,6 +78,12 @@ public abstract class BaseActivity extends LocalizationActivity {
      * @return the res Id of the activity's layout xml file.
      */
     public abstract int getLayoutResId();
+
+    @Override
+    public void onPostCreate(Bundle bundle) {
+        super.onPostCreate(bundle);
+        onInitialize(bundle);
+    }
 
     /**
      * The function get called on {@link android.app.Activity#onPostCreate(Bundle)}
@@ -64,9 +93,11 @@ public abstract class BaseActivity extends LocalizationActivity {
      */
     public abstract void onInitialize(Bundle bundle);
 
-    public abstract void onPaused();
-
-    public abstract void onResumed();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        onClosed();
+    }
 
     /**
      * The function get called when the activity's {@link Activity#onBackPressed()}
@@ -74,55 +105,11 @@ public abstract class BaseActivity extends LocalizationActivity {
      */
     public abstract void onClosed();
 
-    /**
-     * The function get called when the activity is destroying.
-     */
-    public abstract void onDestroyed();
-
-
-    @Override
-    public void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-        initiate();
-    }
-
-
-    @Override
-    public void onPostCreate(Bundle bundle) {
-        super.onPostCreate(bundle);
-        onInitialize(bundle);
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        isActivityRunning = true;
-        onResumed();
-    }
-
-
     @Override
     public void onPause() {
         super.onPause();
         isActivityRunning = false;
-        onPaused();
     }
-
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        onClosed();
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        onDestroyed();
-    }
-
 
     /**
      * Callback for the result from requesting permissions. This method
@@ -146,16 +133,34 @@ public abstract class BaseActivity extends LocalizationActivity {
         switch (requestCode) {
             case USES_PERMISSIONS_REQUEST_CODE: {
                 if ((grantResults.length > 0) && (grantResults[0] == PERMISSION_GRANTED)) {
-                    String msg = getString(R.string.str_granting_app_permissions_msg);
+                    String msg = getString(R.string.granting_app_permissions_msg);
                     showSimpleMessageBox(msg);
+
                 } else {
-                    String msg = getString(R.string.str_not_granting_app_permission_msg);
-                    showSimpleMessageBox(msg);
+                    String msg = getString(R.string.not_granting_app_permission_msg);
+                    showSimpleMessageBox(msg, new OnButtonClick() {
+                        @Override
+                        public void onYesClick(MessageDialog messageDialog) {
+                            super.onYesClick(messageDialog);
+                            finish();
+                        }
+                    });
                 }
             }
         }
     }
 
+    public void showSimpleMessageBox(final String message) {
+        AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
+            @Override
+            public void doInUIThread() {
+                new MessageDialog(BaseActivity.this)
+                        .setMessage(message)
+                        .setButtonName(getString(R.string.okay), null)
+                        .show();
+            }
+        });
+    }
 
     /**
      * The function returns the {@link App} object reference.
@@ -163,7 +168,6 @@ public abstract class BaseActivity extends LocalizationActivity {
     public App getApp() {
         return this.app;
     }
-
 
     /**
      * The function opens the play store app with the given package Id.
@@ -175,7 +179,6 @@ public abstract class BaseActivity extends LocalizationActivity {
         startActivity(intent);
     }
 
-
     /**
      * The function open the google play store app with it's own parent app's package id.
      */
@@ -185,7 +188,6 @@ public abstract class BaseActivity extends LocalizationActivity {
         startActivity(intent);
     }
 
-
     /**
      * The function returns the {@link InputMethodManager} object reference.
      */
@@ -193,14 +195,12 @@ public abstract class BaseActivity extends LocalizationActivity {
         return (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
-
     /**
      * The function return the {@link Drawable} obeject with the given the drawable res id.
      */
     public Drawable getDrawableImage(int resId) {
         return getResources().getDrawable(resId);
     }
-
 
     /**
      * The function start the given activity class.
@@ -210,7 +210,6 @@ public abstract class BaseActivity extends LocalizationActivity {
         startActivity(new Intent(this, activityClass));
     }
 
-
     /**
      * The function starts the given activity with the given animations.
      */
@@ -219,20 +218,6 @@ public abstract class BaseActivity extends LocalizationActivity {
         overridePendingTransition(enterAnim, outAnim);
     }
 
-
-    public void showSimpleMessageBox(final String message) {
-        AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
-            @Override
-            public void doInUIThread() {
-                new MessageDialog(BaseActivity.this)
-                        .setMessage(message)
-                        .setButtonName(getString(R.string.str_okay), null)
-                        .getDialog().show();
-            }
-        });
-    }
-
-
     public void showSimpleMessageBox(final String title, final String message) {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
             @Override
@@ -240,29 +225,26 @@ public abstract class BaseActivity extends LocalizationActivity {
                 new MessageDialog(BaseActivity.this)
                         .setTitle(title)
                         .setMessage(message)
-                        .setButtonName(getString(R.string.str_okay), null)
-                        .getDialog().show();
+                        .setButtonName(getString(R.string.okay), null)
+                        .show();
             }
         });
     }
-
 
     public void showSimpleMessageBox(final String title,
                                      final String message, final boolean isCancelable) {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
             @Override
             public void doInUIThread() {
-                Dialog dialog = new MessageDialog(BaseActivity.this)
+                MessageDialog messageDialog = new MessageDialog(BaseActivity.this)
                         .setTitle(title)
                         .setMessage(message)
-                        .setButtonName(getString(R.string.str_okay), null)
-                        .getDialog();
-                dialog.setCancelable(isCancelable);
-                dialog.show();
+                        .setButtonName(getString(R.string.okay), null);
+                messageDialog.dialog.setCancelable(isCancelable);
+                messageDialog.dialog.show();
             }
         });
     }
-
 
     public void showSimpleMessageBox(final String message, final MessageDialog.OnClickButton callback) {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
@@ -270,13 +252,12 @@ public abstract class BaseActivity extends LocalizationActivity {
             public void doInUIThread() {
                 new MessageDialog(BaseActivity.this)
                         .setMessage(message)
-                        .setButtonName(getString(R.string.str_okay), null)
+                        .setButtonName(getString(R.string.okay), null)
                         .setCallback(callback)
-                        .getDialog().show();
+                        .show();
             }
         });
     }
-
 
     @TargetApi(Build.VERSION_CODES.N)
     public void showSimpleHtmlMessageBox(final String message) {
@@ -293,13 +274,12 @@ public abstract class BaseActivity extends LocalizationActivity {
                 if (msg != null) {
                     new MessageDialog(BaseActivity.this)
                             .setMessage(message)
-                            .setButtonName(getString(R.string.str_okay), null)
-                            .getDialog().show();
+                            .setButtonName(getString(R.string.okay), null)
+                            .show();
                 }
             }
         });
     }
-
 
     @TargetApi(Build.VERSION_CODES.N)
     public void showSimpleHtmlMessageBox(final String message,
@@ -317,24 +297,21 @@ public abstract class BaseActivity extends LocalizationActivity {
                 if (msg != null) {
                     new MessageDialog(BaseActivity.this)
                             .setMessage(message)
-                            .setButtonName(getString(R.string.str_okay), null)
+                            .setButtonName(getString(R.string.okay), null)
                             .setCallback(callback)
-                            .getDialog().show();
+                            .show();
                 }
             }
         });
     }
 
-
     public int getColorFrom(int resColorId) {
         return getResources().getColor(resColorId);
     }
 
-
     public void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
 
     public void vibrate(int duration) {
         if (vibrator != null) {
@@ -342,17 +319,15 @@ public abstract class BaseActivity extends LocalizationActivity {
         }
     }
 
-
     public void exitActivityOnDoublePress() {
         if (isBackPressEventFired == 0) {
-            String msg = getString(R.string.str_press_back_once_more_to_exit);
+            String msg = getString(R.string.press_back_once_more_to_exit);
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             isBackPressEventFired = 1;
             new CountDownTimer(2000, 1000) {
                 @Override
                 public void onTick(long time) {
                 }
-
 
                 @Override
                 public void onFinish() {
@@ -365,18 +340,6 @@ public abstract class BaseActivity extends LocalizationActivity {
         }
     }
 
-
-    private void initiate() {
-        //initialize all the basic objects
-        this.vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        this.app = (App) getApplication();
-
-        //set the activity layout
-        if (getLayoutResId() != -1)
-            setContentView(getLayoutResId());
-    }
-
-
     /**
      * The function close the app's entire process.
      */
@@ -384,5 +347,26 @@ public abstract class BaseActivity extends LocalizationActivity {
         int pid = android.os.Process.myPid();
         android.os.Process.killProcess(pid);
         System.exit(0);
+    }
+
+    protected void askUserForPermissionsGranted(final String[] permissions) {
+        String msg = getString(R.string.msg_app_permissions);
+        MessageDialog message = new MessageDialog(this);
+        message.setButtonName(getString(R.string.grant_permissions), getString(R.string.cancel));
+        message.setMessage(msg);
+        message.setCallback(new MessageDialog.OnClickButton() {
+            @Override
+            public void onYesClick(MessageDialog messageDialog) {
+                ActivityCompat.requestPermissions(BaseActivity.this, permissions, USES_PERMISSIONS_REQUEST_CODE);
+                messageDialog.dismiss();
+            }
+
+            @Override
+            public void onNoClick(MessageDialog messageDialog) {
+                messageDialog.dismiss();
+                finish();
+            }
+        });
+        message.show();
     }
 }

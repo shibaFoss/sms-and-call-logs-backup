@@ -23,7 +23,6 @@ public final class ProgressDialog {
         progressLoadingText.setText(progressText);
     }
 
-
     public void showInMainThread() {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
             @Override
@@ -37,7 +36,6 @@ public final class ProgressDialog {
         });
     }
 
-
     public void closeInMainThread() {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
             @Override
@@ -50,7 +48,6 @@ public final class ProgressDialog {
             }
         });
     }
-
 
     public Dialog getDialog() {
         return this.dialog;

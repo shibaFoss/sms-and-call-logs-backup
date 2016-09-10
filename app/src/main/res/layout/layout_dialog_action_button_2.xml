@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/str_no"
+            android:text="@string/no"
             android:textColor="@color/black_text"
             />
 
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/str_yes"
+            android:text="@string/yes"
             android:textColor="@color/black_text"
             />
 

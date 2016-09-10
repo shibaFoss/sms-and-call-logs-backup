@@ -33,7 +33,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:singleLine="true"
 
-            android:text="@string/str_1234"
+            android:text="@string/_1234"
             android:textColor="@color/white"
             android:textStyle="bold"
             />
@@ -47,7 +47,7 @@
             android:layout_marginRight="@dimen/dp_5"
             android:singleLine="true"
 
-            android:text="@string/str_the_lion_story"
+            android:text="@string/the_lion_story"
             />
 
     </LinearLayout>

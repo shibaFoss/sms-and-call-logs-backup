@@ -17,7 +17,6 @@ public class BaseWritableObject implements Serializable {
 
     static final long serialVersionUID = -8294949271450580006L;
 
-
     public static void writeObject(Serializable serializable, String filePath, String fileName) {
         final File objectFile = new File(filePath, fileName);
 
@@ -43,7 +42,6 @@ public class BaseWritableObject implements Serializable {
             }
         }
     }
-
 
     public static BaseWritableObject readObject(File objectFile) {
         BaseWritableObject object = null;
@@ -72,7 +70,6 @@ public class BaseWritableObject implements Serializable {
         }
         return object;
     }
-
 
     public static Serializable readSerializableObjects(File objectFile) {
         Serializable object = null;
