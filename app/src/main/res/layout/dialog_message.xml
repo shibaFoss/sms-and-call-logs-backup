@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_dialog_title"/>
+
+    <TextView
+        android:id="@+id/txt_message"
+        style="@style/dialog_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_8"
+
+        android:lineSpacingExtra="@dimen/dp_2"
+        android:text="@string/str_the_lion_story"
+        android:textColor="@color/black_text"
+        />
+
+    <include layout="@layout/layout_dialog_action_button_2"/>
+
+</LinearLayout>

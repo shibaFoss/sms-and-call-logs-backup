@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="@dimen/dp_8"
+    android:background="@drawable/ic_button_selector"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/checkbox"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_message_sender"
+            style="@style/SubHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_4"
+
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_8"
+            android:singleLine="true"
+
+            android:text="@string/str_1234"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/txt_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5"
+            android:singleLine="true"
+
+            android:text="@string/str_the_lion_story"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

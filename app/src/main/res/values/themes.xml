@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="application_window_background">#2a3037</color>
+
+    <style name="ApplicationTheme.FullScreen" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/application_window_background</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white_text_secondary</item>
+
+        <item name="colorPrimary">@color/application_window_background</item>
+        <item name="colorPrimaryDark">@color/application_window_background</item>
+        <item name="colorAccent">@color/red_400</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/black_lighter</item>
+
+        <item name="android:popupMenuStyle">@style/PopupWindowStyle</item>
+    </style>
+
+</resources>

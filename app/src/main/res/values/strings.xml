@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">SMS Backup</string>
+    <string name="str_no">No</string>
+    <string name="str_yes">Yes</string>
+    <string name="str_okay">Okay</string>
+    <string name="str_granting_app_permissions_msg">Hurray! Permissions have been granted successfully.</string>
+    <string name="str_not_granting_app_permission_msg">Oops! The permissions have not been granted.
+        Without granting the permissions the app is limited in functionality.</string>
+    <string name="str_the_lion_story">Once when a lion, the king of the jungle, was asleep, a little mouse began running up and down on him. This soon awakened the lion, who placed his huge paw on the mouse, and opened his big jaws to swallow him.</string>
+    <string name="str_press_back_once_more_to_exit">Press back once more to exit</string>
+    <string name="str_new_account">New Account</string>
+    <string name="str_loading">Loading....</string>
+    <string name="str_menu_navigation">Menu navigation</string>
+    <string name="str_home_header_icon">Home header icon</string>
+    <string name="str_welcome">Welcome</string>
+    <string name="str_premium_upgrade_msg">Please Note : You are using the limited version, upgrade to premium version for all features.</string>
+    <string name="str_skip">Skip</string>
+    <string name="str_upgrade_premium">Upgrade premium</string>
+    <string name="str_backup">Backup</string>
+    <string name="str_backup_icon">Backup icon</string>
+    <string name="str_restore">Restore</string>
+    <string name="str_restore_icon">Restore icon</string>
+    <string name="str_view">View</string>
+    <string name="str_search">Search</string>
+    <string name="str_hello_world">Hello world</string>
+    <string name="str_sms_backup">SMS backup</string>
+    <string name="str_sms_backup_small_cap">SMS Backup</string>
+    <string name="str_call_logs_backup">Call logs backup</string>
+    <string name="str_contact_backup">Contact backup</string>
+    <string name="str_select_backup_type">Select backup type</string>
+    <string name="str_back">Back</string>
+    <string name="str_1234">1234</string>
+    <string name="str_4">4</string>
+</resources>

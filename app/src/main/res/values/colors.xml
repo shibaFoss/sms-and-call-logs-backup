@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="button_press">#37c5c5c5</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_black">#6e000000</color>
+    <color name="border">#a2a2a2</color>
+
+    <!-- google's material design colours from
+    http://www.google.com/design/spec/style/color.html#color-ui-color-palette -->
+    <color name="red_400">#ef5350</color>
+
+    <color name="black_lighter">#55000000</color>
+    <color name="black_text">#de000000</color>
+
+    <color name="white">#ffffff</color>
+    <color name="white_text_secondary">#b3ffffff</color>
+    <color name="red">#fb605e</color>
+
+</resources>

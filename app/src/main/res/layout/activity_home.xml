@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Navigation drawer menu icon. -->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:background="@drawable/ic_button_selector"
+        android:contentDescription="@string/str_menu_navigation"
+        android:onClick="openNavigationDrawer"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:src="@drawable/ic_menu_navigation"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_16"
+        android:contentDescription="@string/str_home_header_icon"
+        android:src="@drawable/ic_home_header"/>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_8"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/home_banner_ad_unit_id"/>
+
+    <include layout="@layout/layout_home_big_buttons"/>
+
+</LinearLayout>

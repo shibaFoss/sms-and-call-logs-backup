@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_58">
+
+        <ImageButton
+            android:id="@+id/bnt_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_button_selector"
+            android:contentDescription="@string/str_back"
+            android:onClick="onBackClicked"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:src="@drawable/ic_back_activity"/>
+
+        <TextView
+            style="@style/textTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bnt_selection"
+            android:layout_toRightOf="@+id/bnt_back"
+            android:text="@string/str_sms_backup_small_cap"/>
+
+        <ImageButton
+            android:id="@+id/bnt_selection"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_button_selector"
+            android:contentDescription="@string/str_back"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:src="@drawable/ic_check_box"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_sms"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/backup_bnt_bottom"
+        android:layout_below="@+id/top_toolbar_layout"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"/>
+
+    <View
+        android:id="@+id/bottom_drop_down_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/backup_bnt_bottom"
+        android:background="@drawable/ic_drop_down_shadow_top_side"/>
+
+    <LinearLayout
+        android:id="@+id/backup_bnt_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/bnt_backup"
+            style="@style/textButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="onClickedBackup"
+            android:padding="@dimen/dp_10"
+            android:text="@string/str_backup"
+            android:textAllCaps="true"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
