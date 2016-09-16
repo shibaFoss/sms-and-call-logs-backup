@@ -15,6 +15,7 @@ import utils.BaseWritableObject;
 public class SmsBrowser extends BaseWritableObject {
 
     static final long serialVersionUID = -8394949271450580006L;
+    public static final String fileFormat = ".smsdb";
 
     public ArrayList<Conversation> allConversations = new ArrayList<>();
     public ArrayList<Sms> allSms = new ArrayList<>();

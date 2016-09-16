@@ -57,7 +57,7 @@ public class BackupDialog {
 
     private String getSuggestedFileName() {
         return "SMS-Backup-" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss")
-                .format(Calendar.getInstance().getTime()) + ".db";
+                .format(Calendar.getInstance().getTime()) + SmsBrowser.fileFormat;
     }
 
 
@@ -68,6 +68,9 @@ public class BackupDialog {
             activity.toast(activity.getString(R.string.give_a_file_name));
             return;
         }
+
+        if (!fileName.endsWith(SmsBrowser.fileFormat))
+            fileName += SmsBrowser.fileFormat;
 
         FileUtils.makeDirectory(new File(ProjectDirectory.APP_PATH));
         SmsBrowser smsBrowser = new SmsBrowser();

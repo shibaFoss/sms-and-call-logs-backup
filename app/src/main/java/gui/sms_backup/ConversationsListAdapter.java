@@ -1,6 +1,5 @@
 package gui.sms_backup;
 
-import android.content.Context;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +12,21 @@ import in.softc.app.R;
 import utils.Font;
 
 public class ConversationsListAdapter extends BaseAdapter {
-    private Context context;
+    private SmsBackupActivity backupActivity;
     private ArrayList<Conversation> conversations;
 
 
-    public ConversationsListAdapter(Context context, ArrayList<Conversation> conversations) {
-        this.context = context;
+    public ConversationsListAdapter(SmsBackupActivity backupActivity, ArrayList<Conversation> conversations) {
+        this.backupActivity = backupActivity;
         this.conversations = conversations;
     }
 
 
     @Override
     public int getCount() {
+        TextView emptyBox = (TextView) backupActivity.findViewById(R.id.txt_empty_box);
+        emptyBox.setTypeface(Font.LatoMedium);
+        emptyBox.setVisibility(conversations.size() < 1 ? View.VISIBLE : View.GONE);
         return conversations.size();
     }
 
@@ -45,7 +47,7 @@ public class ConversationsListAdapter extends BaseAdapter {
     public View getView(final int position, View view, ViewGroup viewGroup) {
         final ViewHolder viewHolder;
         if (view == null) {
-            view = View.inflate(context, R.layout.activity_sms_backup_conversation_list_row, null);
+            view = View.inflate(backupActivity, R.layout.activity_sms_backup_conversation_list_row, null);
             view.setClickable(true);
             viewHolder = new ViewHolder();
             viewHolder.checkBox = (AppCompatCheckBox) view.findViewById(R.id.checkbox);

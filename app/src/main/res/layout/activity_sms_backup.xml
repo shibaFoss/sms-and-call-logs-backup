@@ -33,7 +33,7 @@
             android:layout_toLeftOf="@+id/bnt_select"
             android:layout_toRightOf="@+id/bnt_back"
             android:layout_toStartOf="@+id/bnt_select"
-            android:text="@string/sms_backup_small_cap" />
+            android:text="@string/sms_backup_small_cap"/>
 
         <ImageButton
             android:id="@+id/bnt_select"
@@ -63,11 +63,24 @@
     <ListView
         android:id="@+id/list_sms_conversation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/backup_bnt_bottom"
         android:layout_below="@+id/adView"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginRight="@dimen/dp_8"/>
+
+    <TextView
+        android:id="@+id/txt_empty_box"
+        style="@style/textTitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="@dimen/dp_8"
+        android:drawableTop="@drawable/ic_empty_box"
+        android:gravity="center"
+        android:text="@string/no_sms"
+        android:textAllCaps="true"
+        android:visibility="visible"/>
 
     <View
         android:id="@+id/bottom_drop_down_shadow"
