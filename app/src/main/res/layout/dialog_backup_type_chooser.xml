@@ -24,6 +24,7 @@
             android:src="@drawable/ic_sms"/>
 
         <TextView
+            android:id="@+id/txt_sms_backup"
             style="@style/dialog_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,6 +53,7 @@
             android:src="@drawable/ic_call"/>
 
         <TextView
+            android:id="@+id/txt_call_backup"
             style="@style/dialog_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -80,6 +82,7 @@
             android:src="@drawable/ic_contact_book"/>
 
         <TextView
+            android:id="@+id/txt_contact_backup"
             style="@style/dialog_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

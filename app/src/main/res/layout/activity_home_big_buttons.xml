@@ -11,13 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_8"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_16"
             android:layout_weight="1"
             android:background="@drawable/ic_big_button_selector"
             android:clickable="true"
@@ -34,19 +37,17 @@
                 android:src="@drawable/ic_backup"/>
 
             <TextView
+                android:id="@+id/txt_backup"
                 style="@style/textBodyStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-
                 android:padding="@dimen/dp_10"
                 android:shadowColor="@color/transparent_black"
                 android:shadowDx=".4"
                 android:shadowDy=".4"
                 android:shadowRadius=".4"
-
                 android:text="@string/backup"
                 android:textSize="@dimen/material_text_button"
                 />
@@ -56,8 +57,10 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_8"
             android:layout_weight="1"
             android:background="@drawable/ic_big_button_selector"
             android:clickable="true"
@@ -74,19 +77,17 @@
                 android:src="@drawable/ic_restore"/>
 
             <TextView
+                android:id="@+id/txt_restore"
                 style="@style/textBodyStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-
                 android:padding="@dimen/dp_10"
                 android:shadowColor="@color/transparent_black"
                 android:shadowDx=".4"
                 android:shadowDy=".4"
                 android:shadowRadius=".4"
-
                 android:text="@string/restore"
                 android:textSize="@dimen/material_text_button"
                 />
@@ -99,13 +100,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_8"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_16"
             android:layout_weight="1"
             android:background="@drawable/ic_big_button_selector"
             android:clickable="true"
@@ -122,19 +126,17 @@
                 android:src="@drawable/ic_view"/>
 
             <TextView
+                android:id="@+id/txt_view"
                 style="@style/textBodyStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-
                 android:padding="@dimen/dp_10"
                 android:shadowColor="@color/transparent_black"
                 android:shadowDx=".4"
                 android:shadowDy=".4"
                 android:shadowRadius=".4"
-
                 android:text="@string/view"
                 android:textSize="@dimen/material_text_button"
                 />
@@ -144,8 +146,10 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_8"
             android:layout_weight="1"
             android:background="@drawable/ic_big_button_selector"
             android:clickable="true"
@@ -162,19 +166,17 @@
                 android:src="@drawable/ic_search_phone"/>
 
             <TextView
+                android:id="@+id/txt_search"
                 style="@style/textBodyStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-
                 android:padding="@dimen/dp_10"
                 android:shadowColor="@color/transparent_black"
                 android:shadowDx=".4"
                 android:shadowDy=".4"
                 android:shadowRadius=".4"
-
                 android:text="@string/search"
                 android:textSize="@dimen/material_text_button"
                 />

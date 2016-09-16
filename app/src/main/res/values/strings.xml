@@ -28,7 +28,7 @@
     <string name="sms_backup_small_cap">SMS Backup</string>
     <string name="call_logs_backup">Call logs backup</string>
     <string name="contact_backup">Contact backup</string>
-    <string name="select_backup_type">Select backup type</string>
+    <string name="select_backup_type">Select Backup Type</string>
     <string name="back">Back</string>
     <string name="_1234">1234</string>
     <string name="_4">4</string>

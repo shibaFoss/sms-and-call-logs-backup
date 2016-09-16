@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.softc.app.R;
+import utils.Font;
 
 public class ConversationsListAdapter extends BaseAdapter {
     private Context context;
@@ -50,6 +51,10 @@ public class ConversationsListAdapter extends BaseAdapter {
             viewHolder.checkBox = (AppCompatCheckBox) view.findViewById(R.id.checkbox);
             viewHolder.senderAddress = (TextView) view.findViewById(R.id.txt_sender_address);
             viewHolder.recentAddress = (TextView) view.findViewById(R.id.txt_recent_message);
+
+            viewHolder.senderAddress.setTypeface(Font.LatoRegular);
+            viewHolder.recentAddress.setTypeface(Font.LatoLight);
+
             view.setTag(viewHolder);
 
         } else {
