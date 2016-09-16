@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "in.softc.sms_backup"
-        minSdkVersion 17
+        minSdkVersion 14
         targetSdkVersion 24
         versionName "1.4"
     }
@@ -30,4 +30,5 @@ android {
 dependencies {
     compile "com.android.support:appcompat-v7:24.1.1"
     compile "com.google.android.gms:play-services-ads:9.4.0"
+
 }

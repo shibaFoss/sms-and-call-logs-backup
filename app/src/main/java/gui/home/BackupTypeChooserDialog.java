@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import gui.BaseActivity;
-import gui.sms_backup.SMSBackupActivity;
+import gui.sms_backup.SmsBackupActivity;
 import in.softc.app.R;
 import utils.DialogUtility;
 import utils.ViewUtility;
@@ -29,7 +29,7 @@ public class BackupTypeChooserDialog implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.bnt_sms_backup: {
-                activity.startActivity(SMSBackupActivity.class);
+                activity.startActivity(SmsBackupActivity.class);
             }
             break;
             case R.id.bnt_call_backup: {

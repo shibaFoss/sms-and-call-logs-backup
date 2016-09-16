@@ -27,7 +27,8 @@
         </activity>
 
         <activity android:name="gui.home.HomeActivity"/>
-        <activity android:name="gui.sms_backup.SMSBackupActivity"/>
+
+        <activity android:name="gui.sms_backup.SmsBackupActivity"/>
 
     </application>
 
