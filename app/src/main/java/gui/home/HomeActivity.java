@@ -46,36 +46,6 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    /**
-     * The function loads the banner ad and show them on the {@link AdView} of the activity's layout.
-     */
-    private void loadBannerAd() {
-        //checks if the user already brought the premium version of the app.
-        if (isPremiumVersion) {
-            View adView = findViewById(R.id.adView);
-            if (adView != null) {
-                adView.setVisibility(View.GONE);
-            }
-        } else {
-            final AdView adView = (AdView) findViewById(R.id.adView);
-            final AdRequest adRequest = new AdRequest.Builder().build();
-            if (adView != null) {
-                adView.loadAd(adRequest);
-                adView.setAdListener(new AdListener() {
-                    @Override
-                    public void onAdFailedToLoad(int errorCode) {
-                        super.onAdFailedToLoad(errorCode);
-                        new Timer(5000, 5000) {
-                            @Override
-                            public void onFinish() {
-                                adView.loadAd(adRequest);
-                            }
-                        }.start();
-                    }
-                });
-            }
-        }
-    }
 
     /**
      * The function opens the navigation drawer,

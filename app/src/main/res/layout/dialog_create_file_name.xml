@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/dialog"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_dialog_title"/>
+
+    <EditText
+        android:id="@+id/edit_file_name"
+        style="@style/textBodyStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        android:background="@drawable/ic_edit_text_bg"
+        android:padding="@dimen/dp_10"
+        android:text="@string/_1234"
+        android:textColor="@color/black_text"
+        android:textSize="@dimen/sp_16"
+        />
+
+    <include layout="@layout/layout_dialog_action_button_2"/>
+
+</LinearLayout>

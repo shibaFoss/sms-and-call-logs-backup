@@ -14,8 +14,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import core.App;
 import gui.static_dialogs.MessageDialog;
@@ -24,6 +29,7 @@ import in.softc.app.R;
 import libs.AsyncJob;
 import libs.localization.LocalizationActivity;
 import utils.OsUtility;
+import utils.Timer;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -50,17 +56,20 @@ public abstract class BaseActivity extends LocalizationActivity {
     private boolean isActivityRunning = false;
     private int isBackPressEventFired = 0;
 
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         initiate();
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
         isActivityRunning = true;
     }
+
 
     private void initiate() {
         //initialize all the basic objects
@@ -72,6 +81,7 @@ public abstract class BaseActivity extends LocalizationActivity {
             setContentView(getLayoutResId());
     }
 
+
     /**
      * The call back function is used to get the layout res Id of
      * the activity.
@@ -79,11 +89,13 @@ public abstract class BaseActivity extends LocalizationActivity {
      */
     public abstract int getLayoutResId();
 
+
     @Override
     public void onPostCreate(Bundle bundle) {
         super.onPostCreate(bundle);
         onInitialize(bundle);
     }
+
 
     /**
      * The function get called on {@link android.app.Activity#onPostCreate(Bundle)}
@@ -93,11 +105,13 @@ public abstract class BaseActivity extends LocalizationActivity {
      */
     public abstract void onInitialize(Bundle bundle);
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         onClosed();
     }
+
 
     /**
      * The function get called when the activity's {@link Activity#onBackPressed()}
@@ -105,11 +119,13 @@ public abstract class BaseActivity extends LocalizationActivity {
      */
     public abstract void onClosed();
 
+
     @Override
     public void onPause() {
         super.onPause();
         isActivityRunning = false;
     }
+
 
     /**
      * Callback for the result from requesting permissions. This method
@@ -150,6 +166,7 @@ public abstract class BaseActivity extends LocalizationActivity {
         }
     }
 
+
     public void showSimpleMessageBox(final String message) {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
             @Override
@@ -162,12 +179,14 @@ public abstract class BaseActivity extends LocalizationActivity {
         });
     }
 
+
     /**
      * The function returns the {@link App} object reference.
      */
     public App getApp() {
         return this.app;
     }
+
 
     /**
      * The function opens the play store app with the given package Id.
@@ -179,6 +198,7 @@ public abstract class BaseActivity extends LocalizationActivity {
         startActivity(intent);
     }
 
+
     /**
      * The function open the google play store app with it's own parent app's package id.
      */
@@ -188,6 +208,7 @@ public abstract class BaseActivity extends LocalizationActivity {
         startActivity(intent);
     }
 
+
     /**
      * The function returns the {@link InputMethodManager} object reference.
      */
@@ -195,12 +216,14 @@ public abstract class BaseActivity extends LocalizationActivity {
         return (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
+
     /**
      * The function return the {@link Drawable} obeject with the given the drawable res id.
      */
     public Drawable getDrawableImage(int resId) {
         return getResources().getDrawable(resId);
     }
+
 
     /**
      * The function start the given activity class.
@@ -210,6 +233,7 @@ public abstract class BaseActivity extends LocalizationActivity {
         startActivity(new Intent(this, activityClass));
     }
 
+
     /**
      * The function starts the given activity with the given animations.
      */
@@ -217,6 +241,39 @@ public abstract class BaseActivity extends LocalizationActivity {
         startActivity(new Intent(this, activityClass));
         overridePendingTransition(enterAnim, outAnim);
     }
+
+
+    /**
+     * The function loads the banner ad and show them on the {@link AdView} of the activity's layout.
+     */
+    public void loadBannerAd() {
+        //checks if the user already brought the premium version of the app.
+        if (isPremiumVersion) {
+            View adView = findViewById(R.id.adView);
+            if (adView != null) {
+                adView.setVisibility(View.GONE);
+            }
+        } else {
+            final AdView adView = (AdView) findViewById(R.id.adView);
+            final AdRequest adRequest = new AdRequest.Builder().build();
+            if (adView != null) {
+                adView.loadAd(adRequest);
+                adView.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdFailedToLoad(int errorCode) {
+                        super.onAdFailedToLoad(errorCode);
+                        new Timer(5000, 5000) {
+                            @Override
+                            public void onFinish() {
+                                adView.loadAd(adRequest);
+                            }
+                        }.start();
+                    }
+                });
+            }
+        }
+    }
+
 
     public void showSimpleMessageBox(final String title, final String message) {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
@@ -230,6 +287,7 @@ public abstract class BaseActivity extends LocalizationActivity {
             }
         });
     }
+
 
     public void showSimpleMessageBox(final String title,
                                      final String message, final boolean isCancelable) {
@@ -246,6 +304,7 @@ public abstract class BaseActivity extends LocalizationActivity {
         });
     }
 
+
     public void showSimpleMessageBox(final String message, final MessageDialog.OnClickButton callback) {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
             @Override
@@ -258,6 +317,7 @@ public abstract class BaseActivity extends LocalizationActivity {
             }
         });
     }
+
 
     @TargetApi(Build.VERSION_CODES.N)
     public void showSimpleHtmlMessageBox(final String message) {
@@ -280,6 +340,7 @@ public abstract class BaseActivity extends LocalizationActivity {
             }
         });
     }
+
 
     @TargetApi(Build.VERSION_CODES.N)
     public void showSimpleHtmlMessageBox(final String message,
@@ -305,19 +366,23 @@ public abstract class BaseActivity extends LocalizationActivity {
         });
     }
 
+
     public int getColorFrom(int resColorId) {
         return getResources().getColor(resColorId);
     }
 
+
     public void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
 
     public void vibrate(int duration) {
         if (vibrator != null) {
             vibrator.vibrate(20);
         }
     }
+
 
     public void exitActivityOnDoublePress() {
         if (isBackPressEventFired == 0) {
@@ -328,6 +393,7 @@ public abstract class BaseActivity extends LocalizationActivity {
                 @Override
                 public void onTick(long time) {
                 }
+
 
                 @Override
                 public void onFinish() {
@@ -340,6 +406,7 @@ public abstract class BaseActivity extends LocalizationActivity {
         }
     }
 
+
     /**
      * The function close the app's entire process.
      */
@@ -348,6 +415,7 @@ public abstract class BaseActivity extends LocalizationActivity {
         android.os.Process.killProcess(pid);
         System.exit(0);
     }
+
 
     protected void askUserForPermissionsGranted(final String[] permissions) {
         String msg = getString(R.string.msg_app_permissions);
@@ -360,6 +428,7 @@ public abstract class BaseActivity extends LocalizationActivity {
                 ActivityCompat.requestPermissions(BaseActivity.this, permissions, USES_PERMISSIONS_REQUEST_CODE);
                 messageDialog.dismiss();
             }
+
 
             @Override
             public void onNoClick(MessageDialog messageDialog) {
