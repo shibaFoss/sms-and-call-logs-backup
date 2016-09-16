@@ -8,6 +8,7 @@ import android.widget.TextView;
 import gui.BaseActivity;
 import in.softc.app.R;
 import utils.DialogUtility;
+import utils.Font;
 
 /**
  * The class displays a message dialog to the user.
@@ -33,6 +34,13 @@ public class MessageDialog implements View.OnClickListener {
         this.noBnt = (TextView) dialog.findViewById(R.id.bntNo);
         this.titleLayout = (LinearLayout) dialog.findViewById(R.id.title_layout);
         this.actionButtonBorder = dialog.findViewById(R.id.border_action);
+
+        title.setTypeface(Font.LatoMedium);
+
+        yesBnt.setTypeface(Font.LatoMedium);
+        noBnt.setTypeface(Font.LatoMedium);
+        message.setTypeface(Font.LatoRegular);
+
 
         yesBnt.setOnClickListener(this);
         noBnt.setOnClickListener(this);

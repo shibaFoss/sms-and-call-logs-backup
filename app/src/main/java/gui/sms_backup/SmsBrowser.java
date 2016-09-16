@@ -8,17 +8,20 @@ import android.util.Log;
 import java.io.File;
 import java.util.ArrayList;
 
+import core.ProjectDirectory;
 import gui.BaseActivity;
 import utils.BaseWritableObject;
 
 public class SmsBrowser extends BaseWritableObject {
 
+    static final long serialVersionUID = -8394949271450580006L;
+
     public ArrayList<Conversation> allConversations = new ArrayList<>();
     public ArrayList<Sms> allSms = new ArrayList<>();
 
 
-    public void saveClass(File file) {
-        writeObject(this, file.getPath(), file.getName());
+    public void saveClass(String fileName) {
+        writeObject(this, ProjectDirectory.APP_PATH, fileName);
     }
 
 

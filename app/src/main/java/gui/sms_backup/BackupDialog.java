@@ -68,15 +68,14 @@ public class BackupDialog {
             activity.toast(activity.getString(R.string.give_a_file_name));
             return;
         }
-        FileUtils.makeDirectory(new File(ProjectDirectory.APP_PATH));
 
-        File file = new File(ProjectDirectory.APP_PATH, fileName);
+        FileUtils.makeDirectory(new File(ProjectDirectory.APP_PATH));
         SmsBrowser smsBrowser = new SmsBrowser();
         smsBrowser.allConversations = conversations;
         smsBrowser.allSms = SmsBrowser.getAllSms(conversations);
-        smsBrowser.saveClass(file);
-
+        smsBrowser.saveClass(fileName);
         dialog.dismiss();
+        activity.showSimpleMessageBox(activity.getString(R.string.sms_get_backup));
     }
 
 

@@ -40,4 +40,6 @@
     <string name="backup_file_name">Backup File Name</string>
     <string name="file_name">File name</string>
     <string name="give_a_file_name">Please give a file name</string>
+    <string name="sms_get_backup">All SMS gets back-up successfully.</string>
+    <string name="select_sms_conversations">Select some SMS conversations.</string>
 </resources>

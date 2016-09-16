@@ -57,21 +57,35 @@ public class SmsBackupActivity extends BaseActivity implements View.OnClickListe
             backupConversation(selectedConversations);
 
         } else if (view.getId() == R.id.bnt_select) {
-
-            if (!isSelectionButtonClicked) {
-                conversationsListAdapter.selectAllConversation(true);
-                isSelectionButtonClicked = true;
-
-            } else {
-                conversationsListAdapter.selectAllConversation(false);
-                isSelectionButtonClicked = false;
-            }
-            conversationsListAdapter.notifyDataSetChanged();
+            toggleAllSelection();
         }
     }
 
 
+    private void toggleAllSelection() {
+        if (!isSelectionButtonClicked) {
+            conversationsListAdapter.selectAllConversation(true);
+            isSelectionButtonClicked = true;
+
+        } else {
+            conversationsListAdapter.selectAllConversation(false);
+            isSelectionButtonClicked = false;
+        }
+        conversationsListAdapter.notifyDataSetChanged();
+    }
+
+
     private void backupConversation(ArrayList<Conversation> selectedConversations) {
+        if (selectedConversations.isEmpty()) {
+            vibrate(10);
+            showSimpleMessageBox(getString(R.string.select_sms_conversations));
+            return;
+        }
+
+        conversationsListAdapter.selectAllConversation(false);
+        isSelectionButtonClicked = false;
+        conversationsListAdapter.notifyDataSetChanged();
+
         BackupDialog backupDialog = new BackupDialog(this, selectedConversations);
         backupDialog.show();
     }
