@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import gui.BaseActivity;
 import in.softc.app.R;
-import utils.DialogUtility;
 import utils.Font;
 import utils.ViewUtility;
 
@@ -73,7 +72,8 @@ public class SmsBackupActivity extends BaseActivity implements View.OnClickListe
 
 
     private void backupConversation(ArrayList<Conversation> selectedConversations) {
-        DialogUtility.generateNewDialog(this, R.layout.dialog_create_file_name);
+        BackupDialog backupDialog = new BackupDialog(this, selectedConversations);
+        backupDialog.show();
     }
 
 }

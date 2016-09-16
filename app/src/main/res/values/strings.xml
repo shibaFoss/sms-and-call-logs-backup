@@ -37,4 +37,7 @@
         perfectly.</string>
     <string name="cancel">Cancel</string>
     <string name="grant_permissions">Grant Permissions</string>
+    <string name="backup_file_name">Backup File Name</string>
+    <string name="file_name">File name</string>
+    <string name="give_a_file_name">Please give a file name</string>
 </resources>

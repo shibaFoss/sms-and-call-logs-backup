@@ -96,4 +96,13 @@ public class SmsBrowser extends BaseWritableObject {
         return smsList;
     }
 
+
+    public static ArrayList<Sms> getAllSms(ArrayList<Conversation> conversations) {
+        ArrayList<Sms> allSms = new ArrayList<>();
+        for (Conversation con : conversations)
+            for (Sms sms : con.allSms)
+                allSms.add(sms);
+
+        return allSms;
+    }
 }

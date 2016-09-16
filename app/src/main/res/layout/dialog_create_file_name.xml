@@ -14,7 +14,7 @@
         android:layout_margin="@dimen/dp_8"
         android:background="@drawable/ic_edit_text_bg"
         android:padding="@dimen/dp_10"
-        android:text="@string/_1234"
+        android:hint="@string/file_name"
         android:textColor="@color/black_text"
         android:textSize="@dimen/sp_16"
         />
