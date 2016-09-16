@@ -28,7 +28,7 @@ public class MessageDialog implements View.OnClickListener {
         this.dialog = DialogUtility.generateNewDialog(activity, R.layout.dialog_message);
 
         this.title = (TextView) dialog.findViewById(R.id.txt_title);
-        this.message = (TextView) dialog.findViewById(R.id.txt_message);
+        this.message = (TextView) dialog.findViewById(R.id.txt_recent_message);
         this.yesBnt = (TextView) dialog.findViewById(R.id.bntYes);
         this.noBnt = (TextView) dialog.findViewById(R.id.bntNo);
         this.titleLayout = (LinearLayout) dialog.findViewById(R.id.title_layout);

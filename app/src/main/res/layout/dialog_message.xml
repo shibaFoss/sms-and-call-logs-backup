@@ -9,7 +9,7 @@
     <include layout="@layout/layout_dialog_title"/>
 
     <TextView
-        android:id="@+id/txt_message"
+        android:id="@+id/txt_recent_message"
         style="@style/dialog_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

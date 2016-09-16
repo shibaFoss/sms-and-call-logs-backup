@@ -38,6 +38,6 @@
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/home_banner_ad_unit_id"/>
 
-    <include layout="@layout/layout_home_big_buttons"/>
+    <include layout="@layout/activity_home_big_buttons"/>
 
 </LinearLayout>

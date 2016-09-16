@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import gui.BaseActivity;
+import utils.BaseWritableObject;
 
 public class SmsBrowser extends BaseWritableObject {
 

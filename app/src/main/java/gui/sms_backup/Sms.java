@@ -21,16 +21,22 @@ public class Sms implements Serializable {
 
     public String getSenderAddress() {
         if (columnIdArray != null && columnIdArray.length > 0)
-            return columnIdArray[getColumnIndexOfAddress()];
+            return columnIdArray[getColumnIndex("address")];
 
         return "";
     }
 
+    public String getMessageBody() {
+        if (columnIdArray != null && columnIdArray.length > 0)
+            return columnIdArray[getColumnIndex("body")];
 
-    public int getColumnIndexOfAddress() {
+        return "";
+    }
+
+    public int getColumnIndex(String columnName) {
         if (columnDataArray != null && columnDataArray.length > 0)
             for (int i = 0; i < columnDataArray.length; i++)
-                if (columnDataArray[i].equals("address"))
+                if (columnDataArray[i].equals(columnName))
                     return i;
 
         return -1;
