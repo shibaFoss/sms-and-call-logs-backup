@@ -48,7 +48,7 @@
     <string name="sms_restore">SMS Restore</string>
     <string name="total_sms_">"Total SMS : "</string>
     <string name="restoring_wait">Restoring.. wait...</string>
-    <string name="sms_restored_successfully"> SMS(s) restored successfully</string>
+    <string name="sms_restored_successfully">SMS restored successfully</string>
     <string name="attention">Attention</string>
     <string name="msg_app_default_message_permission">On Kitkat and above version only the default Message app can
         write SMS, so to restore the backups this app need to be the default Message app. You can always change it in

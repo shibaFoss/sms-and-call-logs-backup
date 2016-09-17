@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -174,7 +173,7 @@ public class SmsBrowser extends BaseWritableObject {
         }
 
         activity.vibrate(10);
-        activity.showSimpleMessageBox(totalRowCreated + activity.getString(R.string.sms_restored_successfully));
+        activity.showSimpleMessageBox(totalRowCreated + " " + activity.getString(R.string.sms_restored_successfully));
 
     }
 }
