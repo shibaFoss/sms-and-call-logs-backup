@@ -2,8 +2,10 @@ package gui.sms_backup;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.Settings;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.HashMap;
 
 import core.ProjectDirectory;
 import gui.BaseActivity;
+import gui.static_dialogs.MessageDialog;
 import in.softc.app.R;
 import utils.BaseWritableObject;
 
@@ -20,13 +23,11 @@ import utils.BaseWritableObject;
  */
 public class SmsBrowser extends BaseWritableObject {
 
-    static final long serialVersionUID = -8394949271450580006L;
-
     /**
      * this is the file format of the sms backup file. just for recognizing the correct object file from sdcard.
      */
     public static final String fileFormat = ".sms";
-
+    static final long serialVersionUID = -8394949271450580006L;
     /**
      * The following two variable is used at {@link ConversationsListAdapter} class. so it doesn't do anything to the
      * database. It's used just for font-end work.
@@ -37,12 +38,8 @@ public class SmsBrowser extends BaseWritableObject {
     //-------------------------- Actual Data base ------------------------------------------------------------//
     public ArrayList<Conversation> allConversations = new ArrayList<>();
     public ArrayList<Sms> allSms = new ArrayList<>();
+    public String backupNote = "No Backup note.";
     //-------------------------------------------------------------------------------------------------------//
-
-
-    public void saveClass(String fileName) {
-        writeObject(this, ProjectDirectory.APP_PATH, fileName);
-    }
 
 
     public static SmsBrowser readClassFile(File file) {
@@ -157,23 +154,67 @@ public class SmsBrowser extends BaseWritableObject {
     }
 
 
-    public static void restoreSms(BaseActivity activity, ArrayList<SmsBrowser> smsBrowsers) {
+    public static void restoreSms(final BaseActivity activity, ArrayList<SmsBrowser> smsBrowsers) {
+        ArrayList<Sms> allSms = removeDuplicateSms(smsBrowsers);
         ContentResolver contentResolver = activity.getContentResolver();
         Uri queryUri = Uri.parse("content://sms/");
+
         int totalRowCreated = 0;
-        for (SmsBrowser browser : smsBrowsers) {
-            for (Sms sms : browser.allSms) {
-                ContentValues values = new ContentValues();
-                for (String key : sms.data.keySet()) {
-                    values.put(key, sms.data.get(key));
-                }
-                totalRowCreated += contentResolver.bulkInsert(queryUri, new ContentValues[]{values});
-                contentResolver.notifyChange(queryUri, null);
+        for (Sms sms : allSms) {
+            ContentValues values = new ContentValues();
+            for (String key : sms.data.keySet()) {
+                values.put(key, sms.data.get(key));
             }
+            totalRowCreated += contentResolver.bulkInsert(queryUri, new ContentValues[]{values});
+            contentResolver.notifyChange(queryUri, null);
         }
 
         activity.vibrate(10);
-        activity.showSimpleMessageBox(totalRowCreated + " " + activity.getString(R.string.sms_restored_successfully));
+        MessageDialog messageDialog = new MessageDialog(activity);
+        messageDialog.setButtonName(activity.getString(R.string.open_setting_ui),
+                activity.getString(R.string.cancel));
+        messageDialog.setMessage(totalRowCreated + " " +
+                activity.getString(R.string.sms_restored_successfully_msg));
+        messageDialog.setTitle(activity.getString(R.string.restoring_sms_completed));
+        messageDialog.setCallback(new MessageDialog.OnClickButton() {
+            @Override
+            public void onYesClick(MessageDialog messageDialog) {
+                messageDialog.dismiss();
+                activity.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                activity.finish();
+            }
 
+
+            @Override
+            public void onNoClick(MessageDialog messageDialog) {
+                messageDialog.dismiss();
+                activity.finish();
+            }
+        });
+        messageDialog.show();
+
+    }
+
+
+    private static ArrayList<Sms> removeDuplicateSms(ArrayList<SmsBrowser> smsBrowsers) {
+        ArrayList<Sms> result = new ArrayList<>();
+        for (SmsBrowser browser : smsBrowsers) {
+            for (Sms sms : browser.allSms) {
+                boolean alreadyAdded = false;
+                for (Sms storedSms : result)
+                    if (Sms.isSame(storedSms, sms))
+                        alreadyAdded = true;
+
+                if (!alreadyAdded)
+                    result.add(sms);
+            }
+        }
+
+        return result;
+    }
+
+
+    public void saveClass(String fileName) {
+        writeObject(this, ProjectDirectory.APP_PATH, fileName);
     }
 }

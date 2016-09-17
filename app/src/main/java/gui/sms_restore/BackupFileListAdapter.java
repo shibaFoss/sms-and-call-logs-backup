@@ -6,12 +6,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 
-import gui.sms_backup.Sms;
+import core.ProjectDirectory;
 import gui.sms_backup.SmsBrowser;
 import in.softc.app.R;
 import utils.Font;
+
+import static utils.FileUtils.humanReadableSizeOf;
 
 public class BackupFileListAdapter extends BaseAdapter {
     private SmsRestoreActivity restoreActivity;
@@ -66,10 +69,12 @@ public class BackupFileListAdapter extends BaseAdapter {
         }
 
         final SmsBrowser smsBrowser = (SmsBrowser) getItem(position);
-        Sms sms = smsBrowser.allSms.get(0);
         viewHolder.backupFileName.setText(smsBrowser.fileName);
-        viewHolder.backupFileInfo.setText(String.valueOf(restoreActivity.getString(R.string.total_sms_)
-                + smsBrowser.allSms.size()));
+        String value = smsBrowser.allSms.size() + " SMS | " + humanReadableSizeOf(
+                new File(ProjectDirectory.APP_PATH, smsBrowser.fileName).length()) + " | " + smsBrowser
+                .backupNote;
+        viewHolder.backupFileInfo.setText(value);
+
         viewHolder.checkBox.setChecked(smsBrowser.isSelected);
 
         view.setOnClickListener(new View.OnClickListener() {

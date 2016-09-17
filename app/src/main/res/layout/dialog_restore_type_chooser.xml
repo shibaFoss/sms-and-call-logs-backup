@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/dialog"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_dialog_title"/>
+
+    <LinearLayout
+        android:id="@+id/bnt_sms_backup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_button_selector"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_margin="@dimen/dp_8"
+            android:contentDescription="@string/sms_backup"
+            android:padding="@dimen/dp_5"
+            android:src="@drawable/ic_sms"/>
+
+        <TextView
+            android:id="@+id/txt_sms_backup"
+            style="@style/dialog_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:text="@string/sms_restore_"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bnt_call_backup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_button_selector"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_margin="@dimen/dp_8"
+            android:contentDescription="@string/call_logs_backup"
+            android:padding="@dimen/dp_5"
+            android:src="@drawable/ic_call"/>
+
+        <TextView
+            android:id="@+id/txt_call_backup"
+            style="@style/dialog_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:text="@string/call_logs_restore"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bnt_contact_backup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_button_selector"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_margin="@dimen/dp_8"
+            android:contentDescription="@string/contact_backup"
+            android:padding="@dimen/dp_5"
+            android:src="@drawable/ic_contact_book"/>
+
+        <TextView
+            android:id="@+id/txt_contact_backup"
+            style="@style/dialog_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:text="@string/contact_restore"
+            />
+
+    </LinearLayout>
+</LinearLayout>

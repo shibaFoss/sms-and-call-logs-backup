@@ -36,6 +36,7 @@ public class SmsBackupActivity extends BaseActivity implements View.OnClickListe
         listView.setAdapter(conversationsListAdapter);
 
         loadBannerAd();
+        loadNewFullScreenAd();
     }
 
 
@@ -53,25 +54,12 @@ public class SmsBackupActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.txt_backup) {
-            ArrayList<Conversation> selectedConversations = conversationsListAdapter.getSelectedConversations();
-            backupConversation(selectedConversations);
+            ArrayList<Conversation> selectedSMS = conversationsListAdapter.getSelectedConversations();
+            backupConversation(selectedSMS);
 
         } else if (view.getId() == R.id.bnt_select) {
             toggleAllSelection();
         }
-    }
-
-
-    private void toggleAllSelection() {
-        if (!isSelectionButtonClicked) {
-            conversationsListAdapter.selectAllConversation(true);
-            isSelectionButtonClicked = true;
-
-        } else {
-            conversationsListAdapter.selectAllConversation(false);
-            isSelectionButtonClicked = false;
-        }
-        conversationsListAdapter.notifyDataSetChanged();
     }
 
 
@@ -88,6 +76,19 @@ public class SmsBackupActivity extends BaseActivity implements View.OnClickListe
 
         BackupDialog backupDialog = new BackupDialog(this, selectedConversations);
         backupDialog.show();
+    }
+
+
+    private void toggleAllSelection() {
+        if (!isSelectionButtonClicked) {
+            conversationsListAdapter.selectAllConversation(true);
+            isSelectionButtonClicked = true;
+
+        } else {
+            conversationsListAdapter.selectAllConversation(false);
+            isSelectionButtonClicked = false;
+        }
+        conversationsListAdapter.notifyDataSetChanged();
     }
 
 }

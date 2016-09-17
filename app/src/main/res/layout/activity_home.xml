@@ -7,7 +7,11 @@
     android:orientation="vertical">
 
     <!-- Navigation drawer menu icon. -->
-    <ImageButton
+    <TextView
+        android:id="@+id/txt_navigation"
+        style="@style/textButtonStyle"
+        android:textSize="@dimen/sp_18"
+        android:text="@string/quick_options"
         android:layout_width="wrap_content"
         android:layout_height="58dp"
         android:background="@drawable/ic_button_selector"
@@ -15,7 +19,9 @@
         android:onClick="openNavigationDrawer"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
-        android:src="@drawable/ic_menu_navigation"/>
+        android:drawablePadding="@dimen/dp_8"
+        android:drawableLeft="@drawable/ic_menu_navigation"
+        android:drawableStart="@drawable/ic_menu_navigation"/>
 
     <ImageView
         android:layout_width="wrap_content"

@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import gui.BaseActivity;
 
-public class ComposeSmsActivity extends BaseActivity{
+public class ComposeSmsActivity extends BaseActivity {
 
     @Override
     public int getLayoutResId() {

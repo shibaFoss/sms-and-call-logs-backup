@@ -6,6 +6,7 @@ import android.os.Handler;
 import gui.BaseActivity;
 import gui.home.HomeActivity;
 import in.softc.app.R;
+import utils.Font;
 
 public class LaunchActivity extends BaseActivity {
 
@@ -14,8 +15,11 @@ public class LaunchActivity extends BaseActivity {
         return R.layout.activity_launcher;
     }
 
+
     @Override
     public void onInitialize(Bundle bundle) {
+        Font.setFont(Font.LatoMedium, this, R.id.txt_company_name);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -24,6 +28,7 @@ public class LaunchActivity extends BaseActivity {
             }
         }, 1200);
     }
+
 
     @Override
     public void onClosed() {

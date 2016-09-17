@@ -21,7 +21,9 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
+import core.AdMobUnitIds;
 import core.App;
 import gui.static_dialogs.MessageDialog;
 import gui.static_dialogs.OnButtonClick;
@@ -45,8 +47,8 @@ public abstract class BaseActivity extends LocalizationActivity {
      * The variable is requesting code that is used to requesting permissions.
      */
     public static final int USES_PERMISSIONS_REQUEST_CODE = 4;
-
     public boolean isPremiumVersion;
+    protected InterstitialAd fullscreenAd;
     private App app;
     private Vibrator vibrator;
 
@@ -180,6 +182,47 @@ public abstract class BaseActivity extends LocalizationActivity {
     }
 
 
+    public void showSimpleMessageBox(final String message, final MessageDialog.OnClickButton callback) {
+        AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
+            @Override
+            public void doInUIThread() {
+                new MessageDialog(BaseActivity.this)
+                        .setMessage(message)
+                        .setButtonName(getString(R.string.okay), null)
+                        .setCallback(callback)
+                        .show();
+            }
+        });
+    }
+
+
+    public void loadNewFullScreenAd() {
+        if (isPremiumVersion) return;
+
+        final AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdMobUnitIds.DEVICE_ID).build();
+        if (fullscreenAd == null) {
+            fullscreenAd = new InterstitialAd(this);
+            fullscreenAd.setAdUnitId(AdMobUnitIds.FullScreenAdUnitId);
+        }
+
+        if (!fullscreenAd.isLoaded()) {
+            fullscreenAd.loadAd(adRequest);
+        }
+    }
+
+
+    public void showFullscreenAd() {
+        if (isPremiumVersion) return;
+
+        if (fullscreenAd != null) {
+            if (fullscreenAd.isLoaded()) {
+                fullscreenAd.show();
+            }
+        }
+    }
+
+
     /**
      * The function returns the {@link App} object reference.
      */
@@ -300,20 +343,6 @@ public abstract class BaseActivity extends LocalizationActivity {
                         .setButtonName(getString(R.string.okay), null);
                 messageDialog.dialog.setCancelable(isCancelable);
                 messageDialog.dialog.show();
-            }
-        });
-    }
-
-
-    public void showSimpleMessageBox(final String message, final MessageDialog.OnClickButton callback) {
-        AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
-            @Override
-            public void doInUIThread() {
-                new MessageDialog(BaseActivity.this)
-                        .setMessage(message)
-                        .setButtonName(getString(R.string.okay), null)
-                        .setCallback(callback)
-                        .show();
             }
         });
     }

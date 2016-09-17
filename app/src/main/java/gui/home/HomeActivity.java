@@ -18,7 +18,8 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
-        Font.setFont(Font.LatoMedium, this, R.id.txt_backup, R.id.txt_restore, R.id.txt_view, R.id.txt_search);
+        Font.setFont(Font.LatoMedium, this, R.id.txt_navigation, R.id.txt_backup, R.id.txt_restore, R.id.txt_view, R.id
+                .txt_search);
         loadBannerAd();
     }
 

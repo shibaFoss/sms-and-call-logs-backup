@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/dp_8"
     android:background="@drawable/ic_button_selector"
     android:clickable="true"
@@ -47,7 +47,7 @@
             android:layout_marginBottom="@dimen/dp_4"
             android:layout_marginLeft="@dimen/dp_5"
             android:layout_marginRight="@dimen/dp_5"
-            android:singleLine="true"
+            android:singleLine="false"
             android:text="@string/the_lion_story"
             />
 

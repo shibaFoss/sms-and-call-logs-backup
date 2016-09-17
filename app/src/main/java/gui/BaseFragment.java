@@ -13,12 +13,14 @@ public abstract class BaseFragment extends Fragment {
     protected View layoutView;
     private BaseActivity baseActivity;
 
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater,
                              ViewGroup layoutContainer, Bundle savedInstanceState) {
         this.baseActivity = (BaseActivity) getActivity();
         return layoutInflater.inflate(getLayoutResId(), layoutContainer, false);
     }
+
 
     /**
      * The method gets called by the {@link BaseFragment} for getting the
@@ -27,11 +29,13 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract int getLayoutResId();
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.layoutView = view;
         this.onAfterLayoutLoad(view, savedInstanceState);
     }
+
 
     /**
      * The method gets called by the {@link BaseFragment} after completion of the
@@ -41,9 +45,11 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void onAfterLayoutLoad(View layoutView, Bundle savedInstanceState);
 
+
     public App getApp() {
         return this.getBaseActivity().getApp();
     }
+
 
     public BaseActivity getBaseActivity() {
         return this.baseActivity;

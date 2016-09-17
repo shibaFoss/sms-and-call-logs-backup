@@ -16,12 +16,14 @@ public final class ProgressDialog {
     private Dialog dialog;
     private TextView progressLoadingText;
 
+
     public ProgressDialog(BaseActivity activity, boolean cancelable, String progressText) {
         dialog = DialogUtility.generateNewDialog(activity, R.layout.dialog_progress);
         dialog.setCancelable(cancelable);
         progressLoadingText = (TextView) dialog.findViewById(R.id.txt_title);
         progressLoadingText.setText(progressText);
     }
+
 
     public void showInMainThread() {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
@@ -36,6 +38,7 @@ public final class ProgressDialog {
         });
     }
 
+
     public void closeInMainThread() {
         AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
             @Override
@@ -48,6 +51,7 @@ public final class ProgressDialog {
             }
         });
     }
+
 
     public Dialog getDialog() {
         return this.dialog;

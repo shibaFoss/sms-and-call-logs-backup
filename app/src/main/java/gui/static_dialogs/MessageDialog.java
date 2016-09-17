@@ -21,6 +21,7 @@ public class MessageDialog implements View.OnClickListener {
     private View actionButtonBorder;
     private OnClickButton onClickButtonListener;
 
+
     /**
      * Public constructor.
      * @param activity the activity is needed for building the dialog.
@@ -41,7 +42,6 @@ public class MessageDialog implements View.OnClickListener {
         noBnt.setTypeface(Font.LatoMedium);
         message.setTypeface(Font.LatoRegular);
 
-
         yesBnt.setOnClickListener(this);
         noBnt.setOnClickListener(this);
 
@@ -50,6 +50,7 @@ public class MessageDialog implements View.OnClickListener {
         noBnt.setVisibility(View.GONE);
         actionButtonBorder.setVisibility(View.GONE);
     }
+
 
     @Override
     public void onClick(View view) {
@@ -67,13 +68,16 @@ public class MessageDialog implements View.OnClickListener {
         }
     }
 
+
     public void dismiss() {
         dialog.dismiss();
     }
 
+
     public void show() {
         dialog.show();
     }
+
 
     /**
      * The function sets the given string to the dialog's title.
@@ -88,6 +92,7 @@ public class MessageDialog implements View.OnClickListener {
         return this;
     }
 
+
     /**
      * The function sets the given string to the dialog's message field.
      * @param messageText the string to be set on dialog's message field.
@@ -96,6 +101,7 @@ public class MessageDialog implements View.OnClickListener {
         message.setText(messageText);
         return this;
     }
+
 
     /**
      * The function sets the string to the dialog's action buttons.
@@ -112,10 +118,12 @@ public class MessageDialog implements View.OnClickListener {
         return this;
     }
 
+
     public MessageDialog setCallback(OnClickButton callback) {
         this.onClickButtonListener = callback;
         return this;
     }
+
 
     /**
      * Th interface is used for callback mechanism of button click event.
