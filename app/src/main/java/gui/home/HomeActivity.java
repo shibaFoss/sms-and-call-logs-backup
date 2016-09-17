@@ -39,14 +39,14 @@ public class HomeActivity extends BaseActivity {
 
 
     public void onClickedBackup(View view) {
-        BackupTypeChooserDialog typeChooserDialog = new BackupTypeChooserDialog(this);
-        typeChooserDialog.getDialog().show();
+        BackupTypeChooserDialog chooserDialog = new BackupTypeChooserDialog(this);
+        chooserDialog.getDialog().show();
     }
 
 
     public void onClickedRestore(View view) {
-        vibrate(20);
-        toast(getString(R.string.restore));
+        RestoreTypeChooserDialog chooserDialog = new RestoreTypeChooserDialog(this);
+        chooserDialog.getDialog().show();
     }
 
 

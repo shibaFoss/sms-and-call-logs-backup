@@ -6,22 +6,22 @@ import android.widget.TextView;
 
 import gui.BaseActivity;
 import gui.sms_backup.SmsBackupActivity;
+import gui.sms_restore.SmsRestoreActivity;
 import in.softc.app.R;
 import utils.DialogUtility;
 import utils.Font;
 import utils.ViewUtility;
 
-public class BackupTypeChooserDialog implements View.OnClickListener {
-
+public class RestoreTypeChooserDialog implements View.OnClickListener {
     private BaseActivity activity;
     private Dialog dialog;
 
-    public BackupTypeChooserDialog(BaseActivity activity) {
+    public RestoreTypeChooserDialog(BaseActivity activity) {
         this.activity = activity;
         this.dialog = DialogUtility.generateNewDialog(activity, R.layout.dialog_backup_type_chooser);
 
         TextView title = (TextView) dialog.findViewById(R.id.txt_title);
-        title.setText(activity.getString(R.string.select_backup_type));
+        title.setText(activity.getString(R.string.select_restore_type));
         title.setTypeface(Font.LatoMedium);
 
         Font.setFont(Font.LatoRegular, dialog, R.id.txt_sms_backup, R.id.txt_call_backup, R.id.txt_contact_backup);
@@ -35,7 +35,7 @@ public class BackupTypeChooserDialog implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.bnt_sms_backup: {
-                activity.startActivity(SmsBackupActivity.class);
+                activity.startActivity(SmsRestoreActivity.class);
             }
             break;
 

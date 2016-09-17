@@ -43,4 +43,10 @@
     <string name="sms_get_backup">All SMS gets back-up successfully.</string>
     <string name="select_sms_conversations">Select some SMS conversations.</string>
     <string name="no_sms">No SMS</string>
+    <string name="select_restore_type">Select Restore Type</string>
+    <string name="no_backup_file_found">No Backup file found</string>
+    <string name="sms_restore">SMS Restore</string>
+    <string name="total_sms_">"Total SMS : "</string>
+    <string name="restoring_wait">Restoring.. wait...</string>
+    <string name="restored_successfully">Restored successfully</string>
 </resources>

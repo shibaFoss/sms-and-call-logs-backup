@@ -56,10 +56,9 @@ public class BackupDialog {
 
 
     private String getSuggestedFileName() {
-        return "SMS-Backup-" + new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss")
+        return "Backup-" + new SimpleDateFormat("yyyy-MM-dd-HH-mm")
                 .format(Calendar.getInstance().getTime()) + SmsBrowser.fileFormat;
     }
-
 
     private void backup(BaseActivity activity, ArrayList<Conversation> conversations) {
         String fileName = editFileName.getText().toString();

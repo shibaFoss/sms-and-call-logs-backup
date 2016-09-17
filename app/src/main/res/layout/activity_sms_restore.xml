@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_58">
+
+        <ImageButton
+            android:id="@+id/bnt_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_button_selector"
+            android:contentDescription="@string/back"
+            android:onClick="onBackClicked"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:src="@drawable/ic_back_activity"/>
+
+        <TextView
+            android:id="@+id/txt_title"
+            style="@style/textTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/bnt_back"
+            android:layout_toLeftOf="@+id/bnt_select"
+            android:layout_toRightOf="@+id/bnt_back"
+            android:layout_toStartOf="@+id/bnt_select"
+            android:text="@string/sms_restore"/>
+
+        <ImageButton
+            android:id="@+id/bnt_select"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end"
+            android:background="@drawable/ic_button_selector"
+            android:contentDescription="@string/back"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:src="@drawable/ic_check_box"/>
+
+    </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_toolbar_layout"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_8"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/home_banner_ad_unit_id"/>
+
+    <ListView
+        android:id="@+id/list_sms_backup_files"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bnt_restore"
+        android:layout_below="@+id/adView"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"/>
+
+    <TextView
+        android:id="@+id/txt_empty_box"
+        style="@style/textTitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="@dimen/dp_8"
+        android:drawableTop="@drawable/ic_empty_box"
+        android:gravity="center"
+        android:text="@string/no_backup_file_found"
+        android:textAllCaps="true"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/bottom_drop_down_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/backup_bnt_bottom"
+        android:background="@drawable/ic_drop_down_shadow_top_side"/>
+
+    <LinearLayout
+        android:id="@+id/bnt_restore"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_restore"
+            style="@style/textButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="@string/restore"
+            android:textAllCaps="true"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

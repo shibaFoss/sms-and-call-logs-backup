@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
     <uses-permission android:name="android.permission.READ_SMS"/>
     <uses-permission android:name="android.permission.WRITE_SMS" />
 
@@ -29,6 +30,8 @@
         <activity android:name="gui.home.HomeActivity"/>
 
         <activity android:name="gui.sms_backup.SmsBackupActivity"/>
+
+        <activity android:name="gui.sms_restore.SmsRestoreActivity"/>
 
     </application>
 

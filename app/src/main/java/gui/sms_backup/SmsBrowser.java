@@ -1,6 +1,8 @@
 package gui.sms_backup;
 
+import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
@@ -16,6 +18,9 @@ public class SmsBrowser extends BaseWritableObject {
 
     static final long serialVersionUID = -8394949271450580006L;
     public static final String fileFormat = ".smsdb";
+
+    public String fileName = "";
+    public boolean isSelected = false;
 
     public ArrayList<Conversation> allConversations = new ArrayList<>();
     public ArrayList<Sms> allSms = new ArrayList<>();
@@ -108,5 +113,25 @@ public class SmsBrowser extends BaseWritableObject {
                 allSms.add(sms);
 
         return allSms;
+    }
+
+
+    public static void restoreSms(Activity activity, ArrayList<SmsBrowser> smsBrowsers) {
+        ContentResolver contentResolver = activity.getContentResolver();
+        Uri queryUri = Uri.parse("content://sms/");
+
+        for (SmsBrowser browser : smsBrowsers) {
+            for (Sms sms : browser.allSms) {
+                ContentValues values = new ContentValues(sms.columnDataArray.length);
+                for (int i = 0; i < sms.columnIdArray.length; i++) {
+                    values.put(sms.columnDataArray[i], sms.columnIdArray[i]);
+                    Log.d("Content Value", sms.columnDataArray[i] + "[]" + sms.columnIdArray[i]);
+                }
+                int isSuccessful = contentResolver.bulkInsert(queryUri, new ContentValues[]{values});
+                Log.d("Row Created", "" + isSuccessful + " Rows");
+
+                contentResolver.notifyChange(queryUri, null);
+            }
+        }
     }
 }
