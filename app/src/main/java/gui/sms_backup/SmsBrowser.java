@@ -8,22 +8,37 @@ import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import core.ProjectDirectory;
 import gui.BaseActivity;
 import in.softc.app.R;
 import utils.BaseWritableObject;
 
+/**
+ * The class is like a database where we put and restore {@link Sms} objects. The class itself can save to sdcard and
+ * later we can convert the file to the object. So all data will be retrieve by this system.
+ */
 public class SmsBrowser extends BaseWritableObject {
 
     static final long serialVersionUID = -8394949271450580006L;
-    public static final String fileFormat = ".smsdb";
 
+    /**
+     * this is the file format of the sms backup file. just for recognizing the correct object file from sdcard.
+     */
+    public static final String fileFormat = ".sms";
+
+    /**
+     * The following two variable is used at {@link ConversationsListAdapter} class. so it doesn't do anything to the
+     * database. It's used just for font-end work.
+     */
     public String fileName = "";
     public boolean isSelected = false;
 
+    //-------------------------- Actual Data base ------------------------------------------------------------//
     public ArrayList<Conversation> allConversations = new ArrayList<>();
     public ArrayList<Sms> allSms = new ArrayList<>();
+    //-------------------------------------------------------------------------------------------------------//
 
 
     public void saveClass(String fileName) {
@@ -66,12 +81,6 @@ public class SmsBrowser extends BaseWritableObject {
     }
 
 
-    /**
-     * The function will get all the sms from the {@link ContentResolver} and return
-     * all the sms with a list.
-     * @param folderName the sms folder either 'inbox' or 'sent' or 'all'
-     * @return the list of all retrieved sms.
-     */
     public static ArrayList<Sms> getAllSms(BaseActivity activity, String folderName) {
         ArrayList<Sms> smsList = new ArrayList<>();
         ContentResolver contentResolver = activity.getContentResolver();
@@ -86,16 +95,49 @@ public class SmsBrowser extends BaseWritableObject {
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 //first we need to get the column size of every cursor row.
-                int columnSize = cursor.getColumnCount();
+                int columnCount = cursor.getColumnCount();
                 Sms sms = new Sms();
-                sms.columnIdArray = new String[columnSize];
-                sms.columnDataArray = new String[columnSize];
-                for (int position = 0; position < columnSize; position++) {
-                    sms.columnDataArray[position] = cursor.getColumnName(position);
-                    sms.columnIdArray[position] = cursor.getString(position);
-                }
+                sms.data = new HashMap<>();
+                for (int position = 0; position < columnCount; position++) {
+                    String columnName = cursor.getColumnName(position);
+                    String columnValue = cursor.getString(position);
 
-                Log.d("SMS:", "" + sms.toString());
+                    if (columnName.equals("address"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("body"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("contact_name"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("date"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("date_sent"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("locked"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("protocol"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("read"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("service_center"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("status"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("subject"))
+                        sms.data.put(columnName, columnValue);
+
+                    else if (columnName.equals("type"))
+                        sms.data.put(columnName, columnValue);
+                }
                 smsList.add(sms);
             }
 
@@ -122,10 +164,9 @@ public class SmsBrowser extends BaseWritableObject {
         int totalRowCreated = 0;
         for (SmsBrowser browser : smsBrowsers) {
             for (Sms sms : browser.allSms) {
-                ContentValues values = new ContentValues(sms.columnDataArray.length);
-                for (int i = 0; i < sms.columnIdArray.length; i++) {
-                    values.put(sms.columnDataArray[i], sms.columnIdArray[i]);
-                    Log.d("Content Value", sms.columnDataArray[i] + "[]" + sms.columnIdArray[i]);
+                ContentValues values = new ContentValues();
+                for (String key : sms.data.keySet()) {
+                    values.put(key, sms.data.get(key));
                 }
                 totalRowCreated += contentResolver.bulkInsert(queryUri, new ContentValues[]{values});
                 contentResolver.notifyChange(queryUri, null);
