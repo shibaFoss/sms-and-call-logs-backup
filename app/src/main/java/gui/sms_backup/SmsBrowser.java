@@ -1,6 +1,5 @@
 package gui.sms_backup;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 
 import core.ProjectDirectory;
 import gui.BaseActivity;
+import in.softc.app.R;
 import utils.BaseWritableObject;
 
 public class SmsBrowser extends BaseWritableObject {
@@ -116,10 +116,10 @@ public class SmsBrowser extends BaseWritableObject {
     }
 
 
-    public static void restoreSms(Activity activity, ArrayList<SmsBrowser> smsBrowsers) {
+    public static void restoreSms(BaseActivity activity, ArrayList<SmsBrowser> smsBrowsers) {
         ContentResolver contentResolver = activity.getContentResolver();
         Uri queryUri = Uri.parse("content://sms/");
-
+        int totalRowCreated = 0;
         for (SmsBrowser browser : smsBrowsers) {
             for (Sms sms : browser.allSms) {
                 ContentValues values = new ContentValues(sms.columnDataArray.length);
@@ -127,11 +127,13 @@ public class SmsBrowser extends BaseWritableObject {
                     values.put(sms.columnDataArray[i], sms.columnIdArray[i]);
                     Log.d("Content Value", sms.columnDataArray[i] + "[]" + sms.columnIdArray[i]);
                 }
-                int isSuccessful = contentResolver.bulkInsert(queryUri, new ContentValues[]{values});
-                Log.d("Row Created", "" + isSuccessful + " Rows");
-
+                totalRowCreated += contentResolver.bulkInsert(queryUri, new ContentValues[]{values});
                 contentResolver.notifyChange(queryUri, null);
             }
         }
+
+        activity.vibrate(10);
+        activity.showSimpleMessageBox(totalRowCreated + activity.getString(R.string.sms_restored_successfully));
+
     }
 }

@@ -1,6 +1,11 @@
 package gui.sms_restore;
 
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.provider.Telephony;
 import android.view.View;
 import android.widget.ListView;
 
@@ -11,14 +16,15 @@ import java.util.ArrayList;
 import core.ProjectDirectory;
 import gui.BaseActivity;
 import gui.sms_backup.SmsBrowser;
-import gui.static_dialogs.ProgressDialog;
+import gui.static_dialogs.MessageDialog;
+import gui.static_dialogs.OnButtonClick;
 import in.softc.app.R;
-import libs.AsyncJob;
 import utils.Font;
 import utils.ViewUtility;
 
 public class SmsRestoreActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final int DEFAULT_MESSAGE_APP_REQUEST_CODE = 4;
     private BackupFileListAdapter backupFileListAdapter;
     private boolean isSelectionButtonClicked = false;
 
@@ -51,30 +57,67 @@ public class SmsRestoreActivity extends BaseActivity implements View.OnClickList
         finish();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DEFAULT_MESSAGE_APP_REQUEST_CODE) {
+            restoreSms();
+        }
+    }
+
+
+
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.bnt_back)
             finish();
 
-        if (view.getId() == R.id.bnt_select)
+        else if (view.getId() == R.id.bnt_select)
             toggleAllSelection();
 
-        if (view.getId() == R.id.txt_restore) {
-            if (backupFileListAdapter != null)
-                restoreSms(backupFileListAdapter.getSelectedSMSBrowser());
-        }
+        else if (view.getId() == R.id.txt_restore)
+            restoreSms();
     }
 
 
-    private void restoreSms(final ArrayList<SmsBrowser> smsBrowsers) {
+    private void restoreSms() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //the device runs on kitkat and above.
+            if (!isDefaultSmsApp()) {
+                showSimpleMessageBox(getString(R.string.msg_app_default_message_permission), new OnButtonClick() {
+                    @TargetApi(Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onYesClick(MessageDialog messageDialog) {
+                        super.onYesClick(messageDialog);
+                        messageDialog.dismiss();
+                        Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+                        intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, getPackageName());
+                        startActivityForResult(new Intent(Settings.ACTION_WIRELESS_SETTINGS), 0);
+                    }
+                });
+            } else {
+                //restore sms normally.
+                restore(backupFileListAdapter.getSelectedSMSBrowser());
+            }
+        }
+
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private boolean isDefaultSmsApp() {
+        return getPackageName().equals(Telephony.Sms.getDefaultSmsPackage(this));
+    }
+
+
+    private void restore(final ArrayList<SmsBrowser> smsBrowsers) {
         backupFileListAdapter.selectAllConversation(false);
         isSelectionButtonClicked = false;
         backupFileListAdapter.notifyDataSetChanged();
 
-        SmsBrowser.restoreSms(SmsRestoreActivity.this, smsBrowsers);
-        vibrate(10);
-        showSimpleMessageBox(getString(R.string.restored_successfully));
+        SmsBrowser.restoreSms(this, smsBrowsers);
+
     }
 
 
